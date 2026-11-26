@@ -24,6 +24,37 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends verilator
           verilator --version
+      - name: Restore missing source files from uploaded archive
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          root = Path.cwd().resolve()
+          archive = root / "MX64-H_FULL_SOURCE_UPLOAD.zip"
+          if not archive.is_file():
+              raise SystemExit("Source archive not found")
+          restored = []
+          with ZipFile(archive) as zf:
+              for item in zf.infolist():
+                  name = item.filename
+                  prefix = "mxisa64_work_phase36_2/"
+                  if not name.startswith(prefix) or name.endswith("/"):
+                      continue
+                  rel = Path(name[len(prefix):])
+                  if rel.is_absolute() or ".." in rel.parts:
+                      raise SystemExit(f"Unsafe archive path: {name}")
+                  dest = (root / rel).resolve()
+                  if root not in dest.parents:
+                      raise SystemExit(f"Path escapes repository: {name}")
+                  if not dest.exists():
+                      dest.parent.mkdir(parents=True, exist_ok=True)
+                      with zf.open(item) as src, dest.open("wb") as dst:
+                          dst.write(src.read())
+                      restored.append(rel.as_posix())
+          print(f"Restored {len(restored)} missing files from source archive")
+          for path in restored:
+              print(path)
+          PY
       - name: Repository and RTL contract checks
         run: make check
       - name: Software regression tests
