@@ -229,10 +229,10 @@ module reorder_buffer #(
                   complete_tag[c][TAG_W-1:0] == TAG_W'(s) &&
                   complete_tag[c][FULL_TAG_W-1:TAG_W] == generation_q[s]) begin
                 done_q[s] <= 1'b1;
-                value_q[s] <= complete_value[c];
+                value_q[s] = complete_value[c];
                 exception_q[s] <= complete_exception[c];
                 exception_code_q[s] <= complete_exception[c] ? complete_exception_code[c] : 4'd0;
-                exception_value_q[s] <= complete_exception[c] ? complete_exception_value[c] : 64'd0;
+                exception_value_q[s] = complete_exception[c] ? complete_exception_value[c] : 64'd0;
               end
             end
           end
@@ -266,10 +266,10 @@ module reorder_buffer #(
                 complete_tag[c][TAG_W-1:0] == TAG_W'(s) &&
                 complete_tag[c][FULL_TAG_W-1:TAG_W] == generation_q[s]) begin
               done_q[s] <= 1'b1;
-              value_q[s] <= complete_value[c];
+              value_q[s] = complete_value[c];
               exception_q[s] <= complete_exception[c];
               exception_code_q[s] <= complete_exception[c] ? complete_exception_code[c] : 4'd0;
-              exception_value_q[s] <= complete_exception[c] ? complete_exception_value[c] : 64'd0;
+              exception_value_q[s] = complete_exception[c] ? complete_exception_value[c] : 64'd0;
             end
           end
         end
