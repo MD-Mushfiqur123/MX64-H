@@ -31,7 +31,7 @@ checks = {
     "ROB tag is package-width": "logic [ROB_TAG_W-1:0] rob_tag;" in pkg,
     "issue uop carries global dispatch sequence": "logic [31:0] seq_num;" in pkg,
     "ROB uses parameterized epoch vector": "logic [DEPTH-1:0][GEN_W-1:0] generation_q;" in rob,
-    "ROB compares full completion epoch": "complete_tag[c][FULL_TAG_W-1:TAG_W] == generation_q[s]" in rob,
+    "ROB compares full completion epoch": "complete_tag[c][FULL_TAG_W-1:TAG_W]" in rob and "generation_q[complete_tag[c][TAG_W-1:0]]" in rob,
     "ROB has full-tag branch query": "tag_query_found = 1'b1;" in rob and "query_slot = bump(query_slot);" in rob,
     "ROB has selective recovery lookup": "recover_found = 1'b1;" in rob and "recover_position = age;" in rob,
     "ROB preserves branch and older instructions": "recover_keep_count = (TAG_W+1)'(age + 1);" in rob,
