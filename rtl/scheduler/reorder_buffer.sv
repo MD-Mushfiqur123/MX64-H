@@ -204,9 +204,9 @@ module reorder_buffer #(
         kind_q[i] <= '0;
         prd_q[i] <= '0;
         old_prd_q[i] <= '0;
-        value_q[i] = '0;
+        value_q[i] <= '0;
         exception_code_q[i] <= '0;
-        exception_value_q[i] = '0;
+        exception_value_q[i] <= '0;
       end
     end else if (flush) begin
       valid_q <= '0;
@@ -224,16 +224,17 @@ module reorder_buffer #(
         // Completions for surviving older entries and the branch itself remain valid.
         for (int c=0; c<COMPLETE_WIDTH; c++) begin
           if (complete_valid[c]) begin
-            for (int s=0; s<DEPTH; s++) begin
-              if (valid_q[s] &&
-                  complete_tag[c][TAG_W-1:0] == TAG_W'(s) &&
-                  complete_tag[c][FULL_TAG_W-1:TAG_W] == generation_q[s]) begin
-                done_q[s] <= 1'b1;
-                value_q[s] = complete_value[c];
-                exception_q[s] <= complete_exception[c];
-                exception_code_q[s] <= complete_exception[c] ? complete_exception_code[c] : 4'd0;
-                exception_value_q[s] = complete_exception[c] ? complete_exception_value[c] : 64'd0;
-              end
+            if ((complete_tag[c][TAG_W-1:0] < DEPTH) &&
+                valid_q[complete_tag[c][TAG_W-1:0]] &&
+                complete_tag[c][FULL_TAG_W-1:TAG_W] ==
+                  generation_q[complete_tag[c][TAG_W-1:0]]) begin
+              done_q[complete_tag[c][TAG_W-1:0]] <= 1'b1;
+              value_q[complete_tag[c][TAG_W-1:0]] <= complete_value[c];
+              exception_q[complete_tag[c][TAG_W-1:0]] <= complete_exception[c];
+              exception_code_q[complete_tag[c][TAG_W-1:0]] <=
+                complete_exception[c] ? complete_exception_code[c] : 4'd0;
+              exception_value_q[complete_tag[c][TAG_W-1:0]] <=
+                complete_exception[c] ? complete_exception_value[c] : 64'd0;
             end
           end
         end
@@ -261,16 +262,17 @@ module reorder_buffer #(
       // still cancel pre-flush requests or use a wider externally agreed tag.
       for (int c=0; c<COMPLETE_WIDTH; c++) begin
         if (complete_valid[c]) begin
-          for (int s=0; s<DEPTH; s++) begin
-            if (valid_q[s] &&
-                complete_tag[c][TAG_W-1:0] == TAG_W'(s) &&
-                complete_tag[c][FULL_TAG_W-1:TAG_W] == generation_q[s]) begin
-              done_q[s] <= 1'b1;
-              value_q[s] = complete_value[c];
-              exception_q[s] <= complete_exception[c];
-              exception_code_q[s] <= complete_exception[c] ? complete_exception_code[c] : 4'd0;
-              exception_value_q[s] = complete_exception[c] ? complete_exception_value[c] : 64'd0;
-            end
+          if ((complete_tag[c][TAG_W-1:0] < DEPTH) &&
+              valid_q[complete_tag[c][TAG_W-1:0]] &&
+              complete_tag[c][FULL_TAG_W-1:TAG_W] ==
+                generation_q[complete_tag[c][TAG_W-1:0]]) begin
+            done_q[complete_tag[c][TAG_W-1:0]] <= 1'b1;
+            value_q[complete_tag[c][TAG_W-1:0]] <= complete_value[c];
+            exception_q[complete_tag[c][TAG_W-1:0]] <= complete_exception[c];
+            exception_code_q[complete_tag[c][TAG_W-1:0]] <=
+              complete_exception[c] ? complete_exception_code[c] : 4'd0;
+            exception_value_q[complete_tag[c][TAG_W-1:0]] <=
+              complete_exception[c] ? complete_exception_value[c] : 64'd0;
           end
         end
       end
