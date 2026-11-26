@@ -42,11 +42,11 @@ module branch_checkpoint_manager #(
   output logic [COUNT_W-1:0] checkpoint_count
 );
   logic [NUM_CHECKPOINTS-1:0] valid_q;
-  logic [ARCH_REGS-1:0][PHYS_W-1:0] rat_q [0:NUM_CHECKPOINTS-1];
-  logic [PHYS_REGS-1:0] free_q [0:NUM_CHECKPOINTS-1];
-  logic [ROB_TAG_W-1:0] rob_tag_q [0:NUM_CHECKPOINTS-1];
-  logic [SEQ_W-1:0] seq_q [0:NUM_CHECKPOINTS-1];
-  logic [ID_W-1:0] order_q [0:NUM_CHECKPOINTS-1];
+  logic [NUM_CHECKPOINTS-1:0][ARCH_REGS-1:0][PHYS_W-1:0] rat_q;
+  logic [NUM_CHECKPOINTS-1:0][PHYS_REGS-1:0] free_q;
+  logic [NUM_CHECKPOINTS-1:0][ROB_TAG_W-1:0] rob_tag_q;
+  logic [NUM_CHECKPOINTS-1:0][SEQ_W-1:0] seq_q;
+  logic [NUM_CHECKPOINTS-1:0][ID_W-1:0] order_q;
   logic [COUNT_W-1:0] count_q;
   integer free_slot;
   integer resolve_pos;
