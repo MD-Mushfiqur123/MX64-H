@@ -204,9 +204,9 @@ module reorder_buffer #(
         kind_q[i] <= '0;
         prd_q[i] <= '0;
         old_prd_q[i] <= '0;
-        value_q[i] <= '0;
+        value_q[i] = '0;
         exception_code_q[i] <= '0;
-        exception_value_q[i] <= '0;
+        exception_value_q[i] = '0;
       end
     end else if (flush) begin
       valid_q <= '0;
