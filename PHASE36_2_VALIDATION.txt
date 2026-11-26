@@ -1,0 +1,22 @@
+MX64-H Phase 36.2 validation record
+==================================
+Executed in the isolated Phase 36.2 workspace.
+
+PASS: python3 scripts/check_repo.py
+PASS: python3 scripts/check_rtl_sources.py (29 unique modules / 223 source-contract checks)
+PASS: python3 scripts/check_phase36_stabilization.py (6/6 static guards)
+PASS: python3 tools/mx64/abi_check.py (8 checks)
+PASS: python3 tools/mx64/audit_isa.py (55 opcodes)
+PASS: python3 tools/mx64/assembler_tests.py
+PASS: python3 tools/mx64/architecture_tests.py
+PASS: python3 tools/mx64/elf64_tests.py
+PASS: python3 tools/mx64/multisection_tests.py
+PASS: python3 tools/mx64/smoke_test.py
+PASS: python3 tools/mx64/boot_image_tests.py
+PASS: python3 tools/mx64/platform_tests.py
+PASS: python3 tools/mx64/load_image_tests.py
+
+NOT RUN: SystemVerilog parse/compile/elaboration/simulation/formal/synthesis.
+Reason: iverilog, vvp, verilator and yosys are unavailable in this environment.
+No HDL PASS is claimed. The new store-error dual-handshake still requires an
+executable subsystem-level testbench and a platform sink integration test.

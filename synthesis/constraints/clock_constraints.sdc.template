@@ -1,0 +1,4 @@
+# TEMPLATE ONLY — replace all values with approved platform constraints.
+create_clock -name core_clk -period 2.000 [get_ports clk]
+# set_clock_uncertainty, input/output delays, generated clocks and exceptions
+# must be supplied by the SoC/platform timing owner.

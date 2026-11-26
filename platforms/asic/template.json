@@ -1,0 +1,45 @@
+{
+  "profile_version": 1,
+  "platform": "asic",
+  "status": "template_incomplete",
+  "soc": {
+    "name": null,
+    "process_node": null,
+    "pdk_revision": null,
+    "clock_hz": null
+  },
+  "cpu": {
+    "paddr_bits": null,
+    "reset_vector": null,
+    "boot_entry_policy": "ELF_entry_after_loader_validation"
+  },
+  "boot": {
+    "image_platform_id": 2,
+    "boot_source": null,
+    "rom_size_bytes": null,
+    "loader_implementation": "not_implemented"
+  },
+  "memory_map": [
+    {
+      "name": "boot_rom",
+      "base": null,
+      "size": null,
+      "permissions": "rx",
+      "kind": "rom"
+    },
+    {
+      "name": "main_ram",
+      "base": null,
+      "size": null,
+      "permissions": "rwx",
+      "kind": "ram"
+    },
+    {
+      "name": "mmio",
+      "base": null,
+      "size": null,
+      "permissions": "rw",
+      "kind": "mmio"
+    }
+  ]
+}

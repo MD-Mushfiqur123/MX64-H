@@ -1,0 +1,44 @@
+{
+  "profile_version": 1,
+  "platform": "fpga",
+  "status": "template_incomplete",
+  "board": {
+    "vendor": null,
+    "part": null,
+    "clock_hz": null,
+    "toolchain": null
+  },
+  "cpu": {
+    "paddr_bits": null,
+    "reset_vector": null,
+    "boot_entry_policy": "ELF_entry_after_loader_validation"
+  },
+  "boot": {
+    "image_platform_id": 1,
+    "boot_source": null,
+    "loader_implementation": "not_implemented"
+  },
+  "memory_map": [
+    {
+      "name": "boot_rom",
+      "base": null,
+      "size": null,
+      "permissions": "rx",
+      "kind": "rom"
+    },
+    {
+      "name": "main_ram",
+      "base": null,
+      "size": null,
+      "permissions": "rwx",
+      "kind": "ram"
+    },
+    {
+      "name": "mmio",
+      "base": null,
+      "size": null,
+      "permissions": "rw",
+      "kind": "mmio"
+    }
+  ]
+}

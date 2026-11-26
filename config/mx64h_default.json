@@ -1,0 +1,53 @@
+{
+  "profile": "MX64-H",
+  "status": "architecture-target-not-frozen",
+  "isa": {
+    "name": "MXISA-64",
+    "xlen": 64,
+    "instruction_bits": 32,
+    "endianness": "little"
+  },
+  "frontend": {
+    "decode_width": 4,
+    "op_cache_delivery_width": 8,
+    "fetch_queue_entries": 32
+  },
+  "backend": {
+    "dispatch_width": 6,
+    "retire_width": 6,
+    "rob_entries": 256
+  },
+  "rename": {
+    "integer_arch_regs": 32,
+    "integer_phys_regs": 192,
+    "fp_arch_regs": 32,
+    "fp_phys_regs": 192
+  },
+  "schedulers": {
+    "integer_entries": 64,
+    "branch_entries": 24,
+    "load_entries": 48,
+    "store_entries": 32,
+    "fp_entries": 64
+  },
+  "memory": {
+    "l1i_kib": 32,
+    "l1d_kib": 32,
+    "l2_kib": 1024,
+    "line_bytes": 64,
+    "target_loads_per_cycle": 3,
+    "target_stores_per_cycle": 2
+  },
+  "virtual_memory": {
+    "va_bits": 48,
+    "pa_bits": 48,
+    "itlb_entries": 64,
+    "dtlb_entries": 96,
+    "page_table_walker": true
+  },
+  "notes": [
+    "These are MX64 engineering starting points, not AMD specifications.",
+    "All capacities require timing/area/bandwidth analysis and may change before architecture freeze.",
+    "The ISA encoding, privileged architecture, memory model and FP/vector state remain to be frozen."
+  ]
+}

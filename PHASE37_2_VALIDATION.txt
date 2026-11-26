@@ -1,0 +1,32 @@
+MX64-H PHASE 37.2 VALIDATION
+
+Static/contract checks:
+- scripts/check_phase37_2.py: PASS (9/9)
+- scripts/check_repo.py: PASS
+- scripts/check_rtl_sources.py: PASS
+- scripts/check_phase37_1.py: PASS
+- tools/mx64/abi_check.py: PASS
+- tools/mx64/audit_isa.py: PASS
+- tools/mx64/assembler_tests.py: PASS
+- tools/mx64/architecture_tests.py: PASS
+- tools/mx64/elf64_tests.py: PASS
+- tools/mx64/multisection_tests.py: PASS
+
+A second broad rerun was interrupted while invoking smoke_test.py; that invocation
+is not counted as pass or fail. The Phase 37.1 report retains the earlier recorded
+smoke-test pass for that snapshot.
+
+HDL tools:
+- iverilog/vvp: not available
+- verilator: not available
+- yosys: not available
+- slang/surelog: not available
+
+Not run:
+- SystemVerilog parse/lint/compile/elaboration
+- Adapter testbench simulation
+- Full core simulation
+- Formal verification
+- Synthesis/PPA/timing/FPGA/ASIC implementation
+
+Important: static source-contract checks do not prove RTL correctness.

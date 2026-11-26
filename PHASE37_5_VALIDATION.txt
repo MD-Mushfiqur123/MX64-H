@@ -1,0 +1,39 @@
+MX64-H PHASE 37.5 VALIDATION
+===========================
+
+PASS: python3 scripts/check_repo.py
+  repository structure and metadata checks (55 required files)
+PASS: python3 scripts/check_rtl_sources.py
+  31 unique RTL module declarations; 223 RTL source-contract checks
+PASS: python3 scripts/check_phase37_2.py
+  9/9 static contracts
+PASS: python3 scripts/check_phase37_3.py
+  10/10 static contracts
+PASS: python3 scripts/check_phase37_5.py
+  13/13 top-level integration contracts
+PASS: tools/mx64/abi_check.py
+  8 checks
+PASS: tools/mx64/audit_isa.py
+  55 opcode rows; canonical encoder/decoder round trips
+PASS: tools/mx64/assembler_tests.py
+PASS: tools/mx64/architecture_tests.py
+PASS: tools/mx64/elf64_tests.py
+PASS: tools/mx64/multisection_tests.py
+PASS: tools/mx64/smoke_test.py
+PASS: tools/mx64/boot_image_tests.py
+PASS: tools/mx64/platform_tests.py
+PASS: tools/mx64/load_image_tests.py
+
+Historical static checks superseded by top integration:
+- Phase 37.1 script: 17/18; sole failure expected empty/nonfunctional top, now replaced.
+- Phase 37.4 script: 9/10; sole failure expected integration blocker, now replaced.
+
+NOT RUN (tools unavailable):
+- SystemVerilog parse/lint/compile/elaboration
+- RTL simulation / testbench execution
+- Formal verification
+- Synthesis, timing, place-and-route
+- FPGA/ASIC hardware bring-up
+
+Tool probe found none of: iverilog, verilator, yosys, slang, surelog, svlint.
+No HDL pass is claimed.

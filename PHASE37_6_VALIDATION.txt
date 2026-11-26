@@ -1,0 +1,23 @@
+MX64-H Phase 37.6 validation record
+
+PASS: bash -n scripts/run_rtl_lint.sh
+PASS: workflow structural contract
+PASS: scripts/check_repo.py (55 required files)
+PASS: scripts/check_rtl_sources.py (31 modules; 223 source-contract checks)
+PASS: scripts/check_phase37_1.py (18/18)
+PASS: scripts/check_phase37_2.py (9/9)
+PASS: scripts/check_phase37_3.py (10/10)
+PASS: scripts/check_phase37_4.py (10/10)
+PASS: scripts/check_phase37_5.py (13/13)
+PASS: scripts/check_phase37_6.py (10/10)
+PASS: tools/mx64/abi_check.py (8 checks)
+PASS: tools/mx64/audit_isa.py (55 opcode rows; canonical round-trips)
+PASS: make check
+PASS: make test (including interpreter smoke test)
+PASS: make boot-image (ELF64 + MXB image created and inspected)
+
+NOT RUN: Verilator lint/elaboration. No HDL tool is installed in this environment.
+NOT RUN: Event-driven RTL simulation, formal verification, synthesis, timing, or FPGA/ASIC implementation.
+
+Interpretation: The cloud CI workflow is authored and statically checked. An actual
+GitHub Actions run is still required before any RTL compile/lint result can be claimed.

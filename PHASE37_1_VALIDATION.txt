@@ -1,0 +1,48 @@
+MX64-H PHASE 37.1 VALIDATION RECORD
+
+Input baseline:
+- MX64H_PHASE36_2_STORE_ERROR_FIX.zip
+- SHA-256: 131542f06f152953fe08338cb28133030530691349d2779afa0c7a0a4b34eb9b
+- Later 36.3/36.4/37.0 bundles were not available as readable archive inputs in this workspace.
+  Their unarchived changes are not claimed as merged.
+
+Static/repository checks (all executed):
+- python3 scripts/check_repo.py: PASS (55 required-file checks)
+- python3 scripts/check_rtl_sources.py: PASS (30 unique modules; 223 source-contract checks)
+- python3 scripts/check_phase36_stabilization.py: PASS (6/6 static guards)
+- python3 scripts/check_phase37_1.py: PASS (18/18 static guards)
+- python3 tools/mx64/abi_check.py: PASS (8 checks)
+- python3 tools/mx64/audit_isa.py: PASS (55 opcode rows; canonical software encoder/decoder round-trip)
+
+Software regression tests (all executed):
+- assembler_tests.py: PASS
+- architecture_tests.py: PASS
+- elf64_tests.py: PASS
+- multisection_tests.py: PASS
+- smoke_test.py: PASS
+- boot_image_tests.py: PASS
+- platform_tests.py: PASS
+- load_image_tests.py: PASS
+- platform_check.py platforms/fpga/template.json: PASS (structural profile validation only)
+- platform_check.py platforms/asic/template.json: PASS (structural profile validation only)
+
+HDL tool discovery:
+- iverilog/vvp: NOT AVAILABLE
+- verilator: NOT AVAILABLE
+- yosys: NOT AVAILABLE
+- slang/surelog: NOT AVAILABLE
+- svlint/verible-verilog-lint: NOT AVAILABLE
+
+Therefore NOT RUN:
+- SystemVerilog parse/lint/compile/elaboration
+- Both new directed testbench simulations
+- Formal verification
+- Synthesis, PPA, timing, FPGA or ASIC implementation
+
+Important limitations:
+- Static source-contract checks are text-pattern checks, not HDL elaboration.
+- The memory issue queue is integrated through dispatch and PRF reference/wakeup paths.
+- A separate LSU response-to-ROB adapter is NOT implemented. A consumer must retain the full ROB tag and destination physical tag from the issued UOP through LSU lifecycle completion, and suppress stale completions after flush/recovery.
+- Memory size/signedness is described by the draft ISA opcode mapping, but the ISA is not frozen. This phase does not guess those semantics in an LSU adapter.
+- Branch execution remains an external boundary.
+- rtl/core/mx64_top.sv remains a non-functional shell.

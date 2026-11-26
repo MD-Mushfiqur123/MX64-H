@@ -1,0 +1,8 @@
+Phase 37.3 validation results
+=============================
+PASS scripts/check_phase37_3.py: 10/10
+PASS scripts/check_repo.py: repository structure and metadata (55 required files)
+PASS scripts/check_rtl_sources.py: 31 module declarations, 223 source-contract checks
+PASS scripts/check_phase37_1.py: 18/18
+PASS scripts/check_phase37_2.py: 9/9
+NOT RUN: HDL compile / elaboration / simulation / formal / synthesis (no tools available)
