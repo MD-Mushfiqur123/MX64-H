@@ -17,7 +17,7 @@ module physical_regfile #(
   input  logic [WRITE_PORTS-1:0][TAG_W-1:0] waddr,
   input  logic [WRITE_PORTS-1:0][DATA_W-1:0] wdata
 );
-  logic [DATA_W-1:0] mem [0:DEPTH-1];
+  logic [DEPTH-1:0][DATA_W-1:0] mem;
   logic [DEPTH-1:0] valid_q;
   integer i, p;
 
