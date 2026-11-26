@@ -1,0 +1,44 @@
+name: MX64-H RTL verification (cloud)
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  software-and-rtl:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Verilator on hosted runner
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends verilator
+          verilator --version
+      - name: Repository and RTL contract checks
+        run: make check
+      - name: Software regression tests
+        run: make test
+      - name: Build example and boot image
+        run: make boot-image
+      - name: SystemVerilog top-level lint/elaboration
+        run: bash scripts/run_rtl_lint.sh
+      - name: Upload diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mx64h-rtl-failure-diagnostics
+          path: |
+            build/
+            *.log
+          if-no-files-found: ignore
+          retention-days: 7

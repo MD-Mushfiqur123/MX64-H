@@ -1,0 +1,8 @@
+build/
+obj_dir/
+*.vcd
+*.fst
+*.log
+*.jou
+*.rpt
+__pycache__/
